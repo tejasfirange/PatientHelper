@@ -2,7 +2,12 @@ const pool = require("../config/db");
 
 const registerPatient = async (req, res) => {
   try {
-    const { email, name, dob, gender, contact_no } = req.body;
+    const { name, dob, gender, contact_no } = req.body;
+    const email = req.user?.email || req.body.email;
+
+    if (!email || !name) {
+      return res.status(400).json({ message: "email and name are required" });
+    }
 
     const query = `
         INSERT INTO patient_details
@@ -31,57 +36,26 @@ const registerPatient = async (req, res) => {
   }
 };
 
-
-// Get patient by email
-const getPatientByEmail = async (req, res) => {
+const getPatientProfile = async (req, res) => {
   try {
-    const { email } = req.params;
+    const email = req.user?.email || req.query.email;
+    if (!email) {
+      return res.status(400).json({ message: "email is required" });
+    }
 
     const result = await pool.query(
-      "SELECT * FROM patient_details WHERE email=$1",
+      "SELECT id, email, name, dob, gender, contact_no FROM patient_details WHERE email=$1",
       [email]
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({
-        message: "Patient not found"
-      });
+      return res.status(404).json({ message: "Patient profile not found" });
     }
 
-    res.json(result.rows[0]);
-
+    return res.json({ patient: result.rows[0] });
   } catch (error) {
-    res.status(500).json({
-      message: error.message
-    });
+    return res.status(500).json({ message: error.message });
   }
 };
 
-
-// Get patient by id
-const getPatientById = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const result = await pool.query(
-      "SELECT * FROM patient_details WHERE id=$1",
-      [id]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({
-        message: "Patient not found"
-      });
-    }
-
-    res.json(result.rows[0]);
-
-  } catch (error) {
-    res.status(500).json({
-      message: error.message
-    });
-  }
-};
-
-
-module.exports = { registerPatient , getPatientByEmail, getPatientById };
+module.exports = { registerPatient, getPatientProfile };

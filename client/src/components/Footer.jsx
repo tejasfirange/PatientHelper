@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '../context/ThemeContext';
 
-function Footer({ theme }) {
-  const isDark = theme === 'dark';
+function Footer() {
+  const { t } = useTranslation('common');
+  const { isDark } = useTheme();
 
   return (
     <footer className={`border-t ${isDark ? 'border-slate-700 bg-slate-900' : 'border-blue-100 bg-white'}`}>
@@ -10,16 +13,16 @@ function Footer({ theme }) {
           isDark ? 'text-slate-300' : 'text-slate-600'
         }`}
       >
-        <p>&copy; {new Date().getFullYear()} MediConnect. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} MediConnect. {t('footer.rights')}</p>
         <div className="flex items-center gap-4">
           <a href="#home" className="transition hover:text-blue-600">
-            Privacy
+            {t('footer.privacy')}
           </a>
           <a href="#home" className="transition hover:text-blue-600">
-            Terms
+            {t('footer.terms')}
           </a>
           <a href="#home" className="transition hover:text-blue-600">
-            Contact
+            {t('footer.contact')}
           </a>
         </div>
       </div>
