@@ -41,6 +41,9 @@ function Dashboard() {
             <Link to="/assessment" className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
               Start Assessment
             </Link>
+            <Link to="/history" className="rounded-xl border border-blue-300 px-5 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50">
+              Past History
+            </Link>
             <button
               onClick={handleLogout}
               className={`rounded-xl border px-5 py-3 text-sm font-semibold ${isDark ? 'border-slate-600 text-slate-100' : 'border-slate-300 text-slate-700'}`}

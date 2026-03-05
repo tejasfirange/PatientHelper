@@ -5,6 +5,7 @@ import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Assessment from './pages/Assessment/Assessment';
 import Result from './pages/Result/Result';
+import History from './pages/History/History';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
@@ -32,6 +33,14 @@ function AppRoutes() {
       />
       <Route path="/assessment" element={<Assessment />} />
       <Route path="/result" element={<Result />} />
+      <Route
+        path="/history"
+        element={
+          <ProtectedRoute>
+            <History />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

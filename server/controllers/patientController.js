@@ -58,4 +58,59 @@ const getPatientProfile = async (req, res) => {
   }
 };
 
-module.exports = { registerPatient, getPatientProfile };
+const getPatientHistory = async (req, res) => {
+  try {
+    const email = req.user?.email;
+    if (!email) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const result = await pool.query(
+      `SELECT pr_id, email, report, is_verified
+       FROM patient_reports
+       WHERE email=$1
+       ORDER BY pr_id DESC`,
+      [email]
+    );
+
+    return res.json({ reports: result.rows });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const getPatientHistoryById = async (req, res) => {
+  try {
+    const email = req.user?.email;
+    const reportId = Number(req.params.id);
+
+    if (!email) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    if (!Number.isInteger(reportId) || reportId <= 0) {
+      return res.status(400).json({ message: "Invalid report id" });
+    }
+
+    const result = await pool.query(
+      `SELECT pr_id, email, report, is_verified
+       FROM patient_reports
+       WHERE email=$1 AND pr_id=$2`,
+      [email, reportId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Report not found" });
+    }
+
+    return res.json({ report: result.rows[0] });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  registerPatient,
+  getPatientProfile,
+  getPatientHistory,
+  getPatientHistoryById,
+};
