@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../context/ThemeContext';
 
-function Footer({ theme }) {
+function Footer() {
   const { t } = useTranslation('common');
-  const isDark = theme === 'dark';
+  const { isDark } = useTheme();
 
   return (
     <footer className={`border-t ${isDark ? 'border-slate-700 bg-slate-900' : 'border-blue-100 bg-white'}`}>

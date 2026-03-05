@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
-function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
+function Navbar() {
   const { t, i18n } = useTranslation('common');
+  const { isDark, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [language, setLanguage] = useState(() => {
@@ -10,12 +13,13 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
     return saved === 'mr' || saved === 'en' ? saved : 'en';
   });
   const languageMenuRef = useRef(null);
-  const isDark = theme === 'dark';
+  const location = useLocation();
+  const onLanding = location.pathname === '/';
 
   const navItems = [
-    { key: 'nav.features', href: '#features' },
-    { key: 'nav.howItWorks', href: '#how-it-works' },
-    { key: 'nav.forClinics', href: '#for-clinics' },
+    { key: 'nav.features', href: onLanding ? '#features' : '/#features' },
+    { key: 'nav.howItWorks', href: onLanding ? '#how-it-works' : '/#how-it-works' },
+    { key: 'nav.forClinics', href: onLanding ? '#for-clinics' : '/#for-clinics' },
   ];
 
   const languages = [
@@ -46,14 +50,14 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
       }`}
     >
       <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-        <a href="#home" className="group inline-flex items-center gap-2">
+        <Link to="/" className="group inline-flex items-center gap-2">
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white transition-transform duration-200 group-hover:scale-105">
             M
           </span>
           <span className={`text-lg font-semibold tracking-tight ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
             {t('brand')}
           </span>
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
@@ -118,7 +122,7 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
           </div>
 
           <button
-            onClick={onToggleTheme}
+            onClick={toggleTheme}
             className={`rounded-lg border px-4 py-2 text-sm font-semibold transition ${
               isDark
                 ? 'border-slate-600 text-slate-100 hover:bg-slate-800'
@@ -127,12 +131,18 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
           >
             {isDark ? t('nav.themeLight') : t('nav.themeDark')}
           </button>
-          <button className="rounded-lg border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-50">
+          <Link
+            to="/login"
+            className="rounded-lg border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-50"
+          >
             {t('nav.signIn')}
-          </button>
-          <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">
+          </Link>
+          <Link
+            to="/register"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+          >
             {t('nav.getStarted')}
-          </button>
+          </Link>
         </div>
 
         <button
@@ -175,19 +185,19 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
               {language === 'en' ? `${t('nav.english')} \u2713` : `${t('nav.marathi')} \u2713`}
             </button>
             <button
-              onClick={onToggleTheme}
+              onClick={toggleTheme}
               className={`w-1/2 rounded-lg border px-3 py-2 text-sm font-semibold ${
                 isDark ? 'border-slate-600 text-slate-100' : 'border-slate-300 text-slate-700'
               }`}
             >
               {isDark ? t('nav.themeLight') : t('nav.themeDark')}
             </button>
-            <button className="w-1/2 rounded-lg border border-blue-200 px-3 py-2 text-sm font-semibold text-blue-700">
+            <Link to="/login" className="w-1/2 rounded-lg border border-blue-200 px-3 py-2 text-center text-sm font-semibold text-blue-700">
               {t('nav.signIn')}
-            </button>
-            <button className="w-1/2 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white">
+            </Link>
+            <Link to="/register" className="w-1/2 rounded-lg bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white">
               {t('nav.getStarted')}
-            </button>
+            </Link>
           </div>
         </div>
       )}

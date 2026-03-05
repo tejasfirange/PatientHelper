@@ -1,30 +1,20 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { useTheme } from '../../context/ThemeContext';
 import './Landing.css';
 
 function Landing() {
   const { t } = useTranslation('landing');
-  const [theme, setTheme] = useState(() => localStorage.getItem('mediconnect-theme') || 'light');
-  const isDark = theme === 'dark';
+  const { isDark } = useTheme();
 
-  useEffect(() => {
-    localStorage.setItem('mediconnect-theme', theme);
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-
-  const pageClass = useMemo(
-    () =>
-      `landing-page min-h-screen ${isDark ? 'theme-dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`,
-    [isDark]
-  );
+  const pageClass = `landing-page min-h-screen ${isDark ? 'theme-dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`;
 
   return (
     <div id="home" className={pageClass}>
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <Navbar />
 
       <main className="relative isolate overflow-hidden">
         <section className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-4 pb-16 pt-14 md:px-6 lg:grid-cols-2 lg:pt-20">
@@ -44,12 +34,15 @@ function Landing() {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <button className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-blue-700">
+              <Link
+                to="/register"
+                className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-blue-700"
+              >
                 {t('startAssessment')}
-              </button>
-              <button className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition duration-200 hover:border-blue-200 hover:text-blue-700">
+              </Link>
+              <a href="#how-it-works" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition duration-200 hover:border-blue-200 hover:text-blue-700">
                 {t('watchDemo')}
-              </button>
+              </a>
             </div>
 
             <div className={`flex flex-wrap gap-6 pt-2 text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
@@ -153,7 +146,7 @@ function Landing() {
           </div>
         </section>
       </main>
-      <Footer theme={theme} />
+      <Footer />
     </div>
   );
 }

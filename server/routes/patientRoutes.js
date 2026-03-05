@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { registerPatient } = require("../controllers/patientController");
+const authMiddleware = require("../middleware/authMiddleware");
+const {
+  registerPatient,
+  getPatientProfile,
+} = require("../controllers/patientController");
 
-
-router.post("/register-patient", registerPatient);
+router.post("/register-patient", authMiddleware, registerPatient);
+router.get("/me", authMiddleware, getPatientProfile);
 
 module.exports = router;
