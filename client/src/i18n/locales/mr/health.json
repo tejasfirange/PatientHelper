@@ -1,0 +1,13 @@
+{
+  "bmiTitle": "BMI कॅल्क्युलेटर",
+  "bmiDesc": "तुमचा बॉडी मास इंडेक्स तपासा.",
+  "weight": "वजन",
+  "height": "उंची",
+  "calculateBMI": "BMI मोजा",
+  "yourBMI": "तुमचा BMI",
+  "status": "स्थिती",
+  "underweight": "कमी वजन",
+  "normal": "सामान्य",
+  "overweight": "जास्त वजन",
+  "obese": "लठ्ठ"
+}
