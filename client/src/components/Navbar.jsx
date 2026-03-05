@@ -1,18 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
+  const { t, i18n } = useTranslation('common');
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const [language, setLanguage] = useState(() => localStorage.getItem('mediconnect-language') || 'English');
+  const [language, setLanguage] = useState(() => {
+    const saved = localStorage.getItem('mediconnect-language');
+    return saved === 'mr' || saved === 'en' ? saved : 'en';
+  });
   const languageMenuRef = useRef(null);
   const isDark = theme === 'dark';
 
-  const navItems = ['Features', 'How It Works', 'For Clinics'];
-  const languages = ['English', 'Marathi'];
+  const navItems = [
+    { key: 'nav.features', href: '#features' },
+    { key: 'nav.howItWorks', href: '#how-it-works' },
+    { key: 'nav.forClinics', href: '#for-clinics' },
+  ];
+
+  const languages = [
+    { code: 'en', label: t('nav.english') },
+    { code: 'mr', label: t('nav.marathi') },
+  ];
 
   useEffect(() => {
     localStorage.setItem('mediconnect-language', language);
-  }, [language]);
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -37,21 +51,21 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
             M
           </span>
           <span className={`text-lg font-semibold tracking-tight ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
-            MediConnect
+            {t('brand')}
           </span>
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
-            <li key={item}>
+            <li key={item.key}>
               <a
-                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                href={item.href}
                 onClick={() => setMenuOpen(false)}
                 className={`text-sm font-medium transition-colors duration-200 hover:text-blue-600 ${
                   isDark ? 'text-slate-300' : 'text-slate-600'
                 }`}
               >
-                {item}
+                {t(item.key)}
               </a>
             </li>
           ))}
@@ -66,10 +80,13 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
                   ? 'border-slate-600 text-slate-100 hover:bg-slate-800'
                   : 'border-slate-300 text-slate-700 hover:bg-slate-100'
               }`}
-              aria-label="Change language"
+              aria-label={t('nav.language')}
             >
-              <span aria-hidden="true">??</span>
-              {language}
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+              </svg>
+              {language === 'en' ? t('nav.english') : t('nav.marathi')}
             </button>
 
             {languageOpen && (
@@ -79,20 +96,20 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
                 }`}
               >
                 {languages.map((item) => {
-                  const selected = item === language;
+                  const selected = item.code === language;
                   return (
                     <button
-                      key={item}
+                      key={item.code}
                       onClick={() => {
-                        setLanguage(item);
+                        setLanguage(item.code);
                         setLanguageOpen(false);
                       }}
                       className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm ${
                         isDark ? 'text-slate-200 hover:bg-slate-800' : 'text-slate-700 hover:bg-blue-50'
                       }`}
                     >
-                      <span>{item}</span>
-                      <span className="text-blue-600">{selected ? '?' : ''}</span>
+                      <span>{item.label}</span>
+                      <span className="text-blue-600">{selected ? '\u2713' : ''}</span>
                     </button>
                   );
                 })}
@@ -108,13 +125,13 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
                 : 'border-slate-300 text-slate-700 hover:bg-slate-100'
             }`}
           >
-            {isDark ? 'Light' : 'Dark'}
+            {isDark ? t('nav.themeLight') : t('nav.themeDark')}
           </button>
           <button className="rounded-lg border border-blue-200 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-50">
-            Sign In
+            {t('nav.signIn')}
           </button>
           <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">
-            Get Started
+            {t('nav.getStarted')}
           </button>
         </div>
 
@@ -127,7 +144,7 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
           }`}
           aria-label="Toggle menu"
         >
-          <span className="text-sm font-semibold">Menu</span>
+          <span className="text-sm font-semibold">{t('nav.menu')}</span>
         </button>
       </nav>
 
@@ -135,27 +152,27 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
         <div className={`border-t px-4 py-3 md:hidden ${isDark ? 'border-slate-700 bg-slate-900' : 'border-blue-100 bg-white'}`}>
           <ul className="space-y-3">
             {navItems.map((item) => (
-              <li key={item}>
+              <li key={item.key}>
                 <a
-                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                  href={item.href}
                   onClick={() => setMenuOpen(false)}
                   className={`block rounded-lg px-3 py-2 text-sm font-medium transition hover:text-blue-600 ${
                     isDark ? 'text-slate-200 hover:bg-slate-800' : 'text-slate-700 hover:bg-blue-50'
                   }`}
                 >
-                  {item}
+                  {t(item.key)}
                 </a>
               </li>
             ))}
           </ul>
           <div className="mt-4 flex gap-2">
             <button
-              onClick={() => setLanguage((prev) => (prev === 'English' ? 'Marathi' : 'English'))}
+              onClick={() => setLanguage((prev) => (prev === 'en' ? 'mr' : 'en'))}
               className={`w-1/2 rounded-lg border px-3 py-2 text-sm font-semibold ${
                 isDark ? 'border-slate-600 text-slate-100' : 'border-slate-300 text-slate-700'
               }`}
             >
-              ?? {language === 'English' ? 'English ?' : 'Marathi ?'}
+              {language === 'en' ? `${t('nav.english')} \u2713` : `${t('nav.marathi')} \u2713`}
             </button>
             <button
               onClick={onToggleTheme}
@@ -163,13 +180,13 @@ function Navbar({ theme = 'light', onToggleTheme = () => {} }) {
                 isDark ? 'border-slate-600 text-slate-100' : 'border-slate-300 text-slate-700'
               }`}
             >
-              {isDark ? 'Light' : 'Dark'}
+              {isDark ? t('nav.themeLight') : t('nav.themeDark')}
             </button>
             <button className="w-1/2 rounded-lg border border-blue-200 px-3 py-2 text-sm font-semibold text-blue-700">
-              Sign In
+              {t('nav.signIn')}
             </button>
             <button className="w-1/2 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white">
-              Get Started
+              {t('nav.getStarted')}
             </button>
           </div>
         </div>
