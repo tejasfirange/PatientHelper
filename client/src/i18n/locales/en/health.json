@@ -1,0 +1,13 @@
+{
+  "bmiTitle": "BMI Calculator",
+  "bmiDesc": "Calculate your Body Mass Index to understand your health status.",
+  "weight": "Weight",
+  "height": "Height",
+  "calculateBMI": "Calculate BMI",
+  "yourBMI": "Your BMI",
+  "status": "Status",
+  "underweight": "Underweight",
+  "normal": "Normal",
+  "overweight": "Overweight",
+  "obese": "Obese"
+}

@@ -8,6 +8,8 @@ import Result from './pages/Result/Result';
 import History from './pages/History/History';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import HealthToolsDashboard from './pages/HealthGames/HealthToolsDashboard';
+import BMICalculator from './components/HealthTools/BMICalculator';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -41,6 +43,9 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route path="/health-tools" element={<HealthToolsDashboard />} />
+      <Route path="/tools/bmi" element={<BMICalculator />} />
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
