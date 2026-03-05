@@ -5,6 +5,7 @@ const assessmentRoutes = require('./routes/assessmentRoutes');
 
 const authRoutes = require("./routes/authRoutes");
 const patientRoutes = require("./routes/patientRoutes");
+const doctorRoutes = require("./routes/doctorRoutes");
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use('/api/assessment', assessmentRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/patient", patientRoutes);
+app.use("/api/doctor", doctorRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.status(200).json({
