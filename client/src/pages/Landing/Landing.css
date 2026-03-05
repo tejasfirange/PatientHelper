@@ -2,6 +2,13 @@
   background-image:
     radial-gradient(circle at 18% 12%, rgba(59, 130, 246, 0.12), transparent 35%),
     radial-gradient(circle at 84% 4%, rgba(191, 219, 254, 0.45), transparent 30%);
+  scroll-behavior: smooth;
+}
+
+.landing-page.theme-dark {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(59, 130, 246, 0.2), transparent 40%),
+    radial-gradient(circle at 90% 5%, rgba(37, 99, 235, 0.18), transparent 35%);
 }
 
 .hero-card {

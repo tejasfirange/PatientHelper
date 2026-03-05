@@ -1,0 +1,252 @@
+{
+  "categories": [
+    {
+      "category": "skin",
+      "startQuestion": "q1",
+      "questions": {
+        "q1": {
+          "text": "What skin problem do you have?",
+          "options": [
+            { "text": "Acne", "score": 1, "next": "q2" },
+            { "text": "Rash", "score": 2, "next": "q2" },
+            { "text": "Dry skin", "score": 1, "next": "q2" },
+            { "text": "Allergic reaction", "score": 3, "next": "q2" }
+          ]
+        },
+        "q2": {
+          "text": "Where is the problem located?",
+          "options": [
+            { "text": "Face", "score": 1, "next": "q3" },
+            { "text": "Hands", "score": 1, "next": "q3" },
+            { "text": "Legs", "score": 1, "next": "q3" },
+            { "text": "Multiple areas", "score": 2, "next": "q3" }
+          ]
+        },
+        "q3": {
+          "text": "Is the area red?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q4" },
+            { "text": "No", "score": 1, "next": "q4" }
+          ]
+        },
+        "q4": {
+          "text": "Do you feel itching?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q5" },
+            { "text": "No", "score": 1, "next": "q5" }
+          ]
+        },
+        "q5": {
+          "text": "Is there swelling?",
+          "options": [
+            { "text": "Yes", "score": 3, "next": "q6" },
+            { "text": "No", "score": 1, "next": "q6" }
+          ]
+        },
+        "q6": {
+          "text": "Did you use a new product recently?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q7" },
+            { "text": "No", "score": 1, "next": "q7" }
+          ]
+        },
+        "q7": {
+          "text": "Do you have allergies?",
+          "options": [
+            { "text": "Yes", "score": 3, "next": "q8" },
+            { "text": "No", "score": 1, "next": "q8" }
+          ]
+        },
+        "q8": {
+          "text": "Is there pain in the affected area?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q9" },
+            { "text": "No", "score": 1, "next": "q9" }
+          ]
+        },
+        "q9": {
+          "text": "Is the rash spreading?",
+          "options": [
+            { "text": "Yes", "score": 5, "redFlag": true, "next": "end" },
+            { "text": "No", "score": 1, "next": "q10" }
+          ]
+        },
+        "q10": {
+          "text": "Do you have fever with the skin issue?",
+          "options": [
+            { "text": "Yes", "score": 4, "redFlag": true, "next": "end" },
+            { "text": "No", "score": 1, "next": "q11" }
+          ]
+        },
+        "q11": {
+          "text": "Is skin cracked?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q12" },
+            { "text": "No", "score": 1, "next": "q12" }
+          ]
+        },
+        "q12": {
+          "text": "Skin dryness level?",
+          "options": [
+            { "text": "None", "score": 1, "next": "q13" },
+            { "text": "Mild", "score": 1, "next": "q13" },
+            { "text": "Moderate", "score": 2, "next": "q13" },
+            { "text": "Severe", "score": 3, "next": "q13" }
+          ]
+        },
+        "q13": {
+          "text": "Pain intensity?",
+          "options": [
+            { "text": "No pain", "score": 0, "next": "q14" },
+            { "text": "Mild", "score": 1, "next": "q14" },
+            { "text": "Moderate", "score": 2, "next": "q14" },
+            { "text": "Severe", "score": 3, "next": "q14" }
+          ]
+        },
+        "q14": {
+          "text": "Treatment applied?",
+          "options": [
+            { "text": "Doctor medicine", "score": 1, "next": "q15" },
+            { "text": "OTC cream", "score": 1, "next": "q15" },
+            { "text": "Home remedy", "score": 1, "next": "q15" },
+            { "text": "No treatment", "score": 1, "next": "q15" }
+          ]
+        },
+        "q15": {
+          "text": "Duration of problem?",
+          "options": [
+            { "text": "Less than 1 day", "score": 1, "next": "end" },
+            { "text": "1-2 days", "score": 1, "next": "end" },
+            { "text": "3-7 days", "score": 2, "next": "end" },
+            { "text": "More than 1 week", "score": 3, "next": "end" }
+          ]
+        }
+      }
+    },
+    {
+      "category": "hair",
+      "startQuestion": "q1",
+      "questions": {
+        "q1": {
+          "text": "What hair issue do you have?",
+          "options": [
+            { "text": "Hair fall", "score": 2, "next": "q2" },
+            { "text": "Dandruff", "score": 1, "next": "q2" },
+            { "text": "Hair thinning", "score": 3, "next": "q2" },
+            { "text": "Dry scalp", "score": 1, "next": "q2" }
+          ]
+        },
+        "q2": {
+          "text": "Severity of the issue?",
+          "options": [
+            { "text": "Very mild", "score": 1, "next": "q3" },
+            { "text": "Mild", "score": 1, "next": "q3" },
+            { "text": "Moderate", "score": 2, "next": "q3" },
+            { "text": "Severe", "score": 3, "next": "q3" }
+          ]
+        },
+        "q3": {
+          "text": "Do you have scalp itching?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q4" },
+            { "text": "No", "score": 1, "next": "q4" }
+          ]
+        },
+        "q4": {
+          "text": "Do you see flakes?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q5" },
+            { "text": "No", "score": 1, "next": "q5" }
+          ]
+        },
+        "q5": {
+          "text": "Is scalp red?",
+          "options": [
+            { "text": "Yes", "score": 3, "next": "q6" },
+            { "text": "No", "score": 1, "next": "q6" }
+          ]
+        },
+        "q6": {
+          "text": "How often do you wash hair?",
+          "options": [
+            { "text": "Daily", "score": 2, "next": "q7" },
+            { "text": "Every 2 days", "score": 1, "next": "q7" },
+            { "text": "Weekly", "score": 1, "next": "q7" },
+            { "text": "Rarely", "score": 2, "next": "q7" }
+          ]
+        },
+        "q7": {
+          "text": "Do you color your hair?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q8" },
+            { "text": "No", "score": 1, "next": "q8" }
+          ]
+        },
+        "q8": {
+          "text": "Is hair thinning visible?",
+          "options": [
+            { "text": "Yes", "score": 3, "next": "q9" },
+            { "text": "No", "score": 1, "next": "q9" }
+          ]
+        },
+        "q9": {
+          "text": "Do you notice bald patches?",
+          "options": [
+            { "text": "Yes", "score": 4, "redFlag": true, "next": "end" },
+            { "text": "No", "score": 1, "next": "q10" }
+          ]
+        },
+        "q10": {
+          "text": "Any scalp pain?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q11" },
+            { "text": "No", "score": 1, "next": "q11" }
+          ]
+        },
+        "q11": {
+          "text": "Stress level recently?",
+          "options": [
+            { "text": "Low", "score": 1, "next": "q12" },
+            { "text": "Medium", "score": 2, "next": "q12" },
+            { "text": "High", "score": 3, "next": "q12" },
+            { "text": "Very high", "score": 4, "next": "q12" }
+          ]
+        },
+        "q12": {
+          "text": "Is hair brittle?",
+          "options": [
+            { "text": "Yes", "score": 2, "next": "q13" },
+            { "text": "No", "score": 1, "next": "q13" }
+          ]
+        },
+        "q13": {
+          "text": "Hair breakage level?",
+          "options": [
+            { "text": "None", "score": 0, "next": "q14" },
+            { "text": "Low", "score": 1, "next": "q14" },
+            { "text": "Medium", "score": 2, "next": "q14" },
+            { "text": "High", "score": 3, "next": "q14" }
+          ]
+        },
+        "q14": {
+          "text": "Using supplements?",
+          "options": [
+            { "text": "Yes doctor prescribed", "score": 1, "next": "q15" },
+            { "text": "Yes OTC", "score": 1, "next": "q15" },
+            { "text": "Natural remedies", "score": 1, "next": "q15" },
+            { "text": "No supplements", "score": 1, "next": "q15" }
+          ]
+        },
+        "q15": {
+          "text": "Duration of problem?",
+          "options": [
+            { "text": "Less than 1 month", "score": 1, "next": "end" },
+            { "text": "1-3 months", "score": 2, "next": "end" },
+            { "text": "3-6 months", "score": 3, "next": "end" },
+            { "text": "More than 6 months", "score": 4, "next": "end" }
+          ]
+        }
+      }
+    }
+  ]
+}
