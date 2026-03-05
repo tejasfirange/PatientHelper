@@ -18,6 +18,11 @@ function Landing() {
 
       <main className="relative isolate overflow-hidden">
         <section className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-4 pb-16 pt-14 md:px-6 lg:grid-cols-2 lg:pt-20">
+
+          <div>
+            <img src="/hero.png" alt="MediConnect Healthcare Hero" />
+          </div>
+
           <div className="space-y-6">
             <p
               className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider ${
